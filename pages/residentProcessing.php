@@ -15,6 +15,30 @@ if ($authentification->authApplicationProcessing() == false) {
     header("Location: ./dashboard.php");
 }
 
+$tableData = $residentManager->displayResidents();
+$filter = 'all';
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+    if(isset($_GET['filter'])){
+        if($_GET['filter'] == "all"){
+            $tableData = $displayResidents->displayResidents();
+            $filter = 'all';
+        }
+        if($_GET['filter'] == "accepted"){
+            $tableData = $residentManager->displayResidentByPosition("Resident Advisor");
+            $filter = 'accepted';
+        }
+        if($_GET['filter'] == "rejected"){
+            $tableData = $residentManager->displayResidentByPosition("Block Rep");
+            $filter = 'rejected';
+        }
+        if($_GET['filter'] == "pending"){
+            $tableData = $residentManager->displayResidentByPosition("Resident");
+            $filter = 'pending';
+        }
+    }
+}
+
 // for search query
 if (isset($_GET['search-q'])) {
     $search = $_GET['search-q'];
@@ -93,9 +117,21 @@ if (isset($_GET['search-q'])) {
                     </div>
                 </form>
             </section>
+          
+
 
             <section>
                 <h2>Residents</h2>
+
+                <div class="controls">
+                    
+                    <h3>Filter By:</h3>
+                    <a href="./residentProcessing.php?filter=all" class="<?php if($filter == 'all'){echo 'active';} ?>  filter-all">All</a>
+                    <a href="./residentProcessing.php?filter=Resident Advisor" class="<?php if($filter == 'Resident Advisor'){echo 'active';} ?> filter-resident Advisor">resident Advisor</a>
+                    <a href="./residentProcessing.php?filter=Block Representative" class="<?php if($filter == 'Block Representative'){echo 'active';} ?> filter-Block Representative">Block Representative</a>
+                    <a href="./residentProcessing.php?filter=Resident" class="<?php if($filter == 'Resident'){echo 'active';} ?> filter-Resident">Resident</a>
+                </div>
+
 
 
                 <table>

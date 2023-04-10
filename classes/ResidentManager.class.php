@@ -120,6 +120,24 @@ class ResidentManager
         $stmt->execute();
     }
 
+    public function displayResidentByPosition($position){
+        $dataToDisplay = "";
+        foreach ($this->residentList as $resident){
+            if($resident->getresident()->getPosition() == $position){
+                $dataToDisplay .= "<tr>";
+                $dataToDisplay .= "<td>".$resident->getResidents()."</td>";
+                $dataToDisplay .= "<td>".$resident->getPersonalDetails()->getFirstName(). " " . $resident->getPersonalDetails()->getLastName() . "</td>";
+                $dataToDisplay .= "<td> <span class=\"" . $resident->getresident()->getPosition() . "\">" . $resident->getresident()->getPosition(). "<span> </td>"; 
+                //$dataToDisplay .= "<td> <a href=\" ./applicationDetails.php?id=". $applicant->getApplicantID() ."\" target=\"_blank\">View</a></td>"; //A link to view the application details
+                $dataToDisplay .= "</tr>";
+            }
+        }
+        return $dataToDisplay;
+
+    }
+    
+
+
 
     public function displayResidents($search = null)
     {
@@ -159,3 +177,5 @@ class ResidentManager
         return $dataToDisplay;
     }
 }
+
+    
