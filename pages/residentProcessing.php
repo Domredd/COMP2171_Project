@@ -121,10 +121,8 @@ if (isset($_GET['search-q'])) {
 
 
             <section>
-                <h2>Residents</h2>
-
+            
                 <div class="controls">
-                    
                     <h3>Filter By:</h3>
                     <a href="./residentProcessing.php?filter=all" class="<?php if($filter == 'all'){echo 'active';} ?>  filter-all">All</a>
                     <a href="./residentProcessing.php?filter=Resident Advisor" class="<?php if($filter == 'Resident Advisor'){echo 'active';} ?> filter-resident Advisor">resident Advisor</a>
